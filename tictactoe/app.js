@@ -130,21 +130,28 @@ function renderBoard2() {
     });
 }
 
-function generateRandom(min, max) {
+function randomIntFromInterval(min, max) {
 
-    // find diff
-    let difference = max - min;
+    // // find diff
+    // let difference = max - min;
 
-    // generate random number 
-    let rand = Math.random();
+    // // generate random number 
+    // let rand = Math.random();
 
-    // multiply with difference 
-    rand = Math.floor( rand * difference);
+    // // multiply with difference 
+    // rand = Math.floor( rand * difference);
 
-    // add with min value 
-    rand = rand + min;
+    // // add with min value 
+    // rand = rand + min;
 
-    return rand;
+    // return rand;
+
+    return Math.floor(Math.random() * (max - min)) + min;
+
+}
+
+function generateRandom(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 //Easy Mode
@@ -408,6 +415,7 @@ function computerChoiceSmartCorners(){
         let done = false;
         do {
             rand = generateRandom(0,3);
+            console.log(rand);
             if(rand === 0 && board[0][0] === ''){
                 board[0][0] = turn;
                 done = true;
