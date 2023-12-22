@@ -161,8 +161,8 @@ function computerChoice(){
     let rowIdx;
     let currentPos = null;
     do {
-        rowIdx = generateRandom(0,3);
-        colIdx = generateRandom(0,3);
+        rowIdx = generateRandom(0,2);
+        colIdx = generateRandom(0,2);
         currentPos = board[rowIdx][colIdx];
         if(currentPos === ''){
             board[rowIdx][colIdx] = turn;
@@ -286,8 +286,8 @@ function computerChoiceSmart(){
         board[1][1] = turn;
     } else {
         do {
-            rowIdx = generateRandom(0,3);
-            colIdx = generateRandom(0,3);
+            rowIdx = generateRandom(0,2);
+            colIdx = generateRandom(0,2);
             currentPos = board[rowIdx][colIdx];
             if(currentPos === ''){
                 board[rowIdx][colIdx] = turn;
@@ -443,9 +443,10 @@ function computerChoiceSmartCorners(){
     // }
     } else {
         do {
-            rowIdx = generateRandom(0,3);
-            colIdx = generateRandom(0,3);
+            rowIdx = generateRandom(0,2);
+            colIdx = generateRandom(0,2);
             currentPos = board[rowIdx][colIdx];
+            // console.log('rowIdx is: ' + rowIdx + ' and colIdx is: ' + colIdx);
             if(currentPos === ''){
                 board[rowIdx][colIdx] = turn;
             }
@@ -478,7 +479,6 @@ function renderChoice(e){
             // return computerChoiceSmart();
             return computerChoiceSmartCorners();
         }, 500);
-        
     }
 }
 
