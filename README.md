@@ -29,13 +29,15 @@
 
 ## Unsolved Problems
 - Minor CSS issues with text in Tic Tac Toe game
-- CSS issues with portrait on Home Page & About Me Page
+- CSS issues with portrait on Home Page & About Me Page (Resolved)
 
 ## Next Steps
 - Continually add more styling using CSS to improve UX/UI
 - Gradually add more mini-games and projects
 - Add content for settings page
 - Add content for project concepts page
+- Add a carousel
+- Add a modal
 
 
 
