@@ -1,12 +1,11 @@
-/*----- constants -----*/
-
+/*constants*/
 const PLAYERS = {
     '': '',
     '1': 'X',
     '-1': 'O'
  };
  
-/*----- app's state (variables) -----*/
+/*variables*/
 let board;
 let turn;
 let winner;
@@ -14,10 +13,8 @@ let plays;
 let player1Score = 0;
 let player2Score = 0;
 let winPattern;
-
-// let board2;
  
-/*----- cached element references -----*/
+/*cached element references*/
 let button = document.getElementById('play');
 let reset = document.getElementById('reset')
 let msgDisp = document.querySelector('h2');
@@ -26,15 +23,12 @@ let scoreO = document.getElementById('ScoreO');
     
 
 
-/*----- event listeners -----*/
+/*event listeners*/
 button.addEventListener('click', init);
 document.getElementById('board').addEventListener('click', renderChoice);
-// document.getElementById('board2').addEventListener('click', renderChoice2);
 reset.addEventListener('click', resetScore)
 
-
-
-/*----- functions -----*/
+/*functions*/
 init();
 
 function init(){
@@ -43,9 +37,7 @@ function init(){
         ['','',''],
         ['','','']
     ];
-    // board2 = [
-    //     ['','','','','','','','','']
-    // ];
+
     turn = 1;
     winner = null;
     plays = 0;
@@ -77,9 +69,8 @@ function resetScore(){
 function renderBoard() {
     board.forEach(function (rowArr, rowIdx) {
         rowArr.forEach(function (playerVal, colIdx) {
-            const divId = `c${colIdx}r${rowIdx}`;  // e.g. "c6r5"
+            const divId = `c${colIdx}r${rowIdx}`; 
             const box = document.getElementById(divId);
-            // box.classList.add("occupied");
             let element = board[rowIdx][colIdx];
             box.innerHTML = PLAYERS[element];
             if (box.innerHTML === 'X' || box.innerHTML === 'O') {
@@ -123,7 +114,7 @@ function renderBoard() {
 
 function renderBoard2() {
     board2.forEach(function (Idx) {
-            const divId = `${Idx}`;  // e.g. "5"
+            const divId = `${Idx}`;
             const box = document.getElementById(divId);
             let element = board2[Idx];
             box.innerHTML = PLAYERS[element];
@@ -131,26 +122,10 @@ function renderBoard2() {
 }
 
 function randomIntFromInterval(min, max) {
-
-    // // find diff
-    // let difference = max - min;
-
-    // // generate random number 
-    // let rand = Math.random();
-
-    // // multiply with difference 
-    // rand = Math.floor( rand * difference);
-
-    // // add with min value 
-    // rand = rand + min;
-
-    // return rand;
-
     return Math.floor(Math.random() * (max - min)) + min;
-
 }
 
-function generateRandom(min, max) { // min and max included 
+function generateRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -433,20 +408,11 @@ function computerChoiceSmartCorners(){
                 done = true;
             }
         } while (!done);
-    
-    // } else if(board[0][2] === ''){
-    //     board[0][2] = turn;
-    // } else if(board[2][0] === ''){
-    //     board[2][0] = turn;
-    // } else if(board[2][2] === ''){
-    //     board[2][2] = turn;
-    // }
     } else {
         do {
             rowIdx = generateRandom(0,2);
             colIdx = generateRandom(0,2);
             currentPos = board[rowIdx][colIdx];
-            // console.log('rowIdx is: ' + rowIdx + ' and colIdx is: ' + colIdx);
             if(currentPos === ''){
                 board[rowIdx][colIdx] = turn;
             }
@@ -475,8 +441,6 @@ function renderChoice(e){
     render();
     if (plays < 9 && !winner){
         setTimeout(function(){
-            // return computerChoice();
-            // return computerChoiceSmart();
             return computerChoiceSmartCorners();
         }, 500);
     }
@@ -560,136 +524,6 @@ function checkWin(){
     return null;
 }
 
-
-
-//game3
-// const player = "O";
-// const computer = "X";
-
-// let board_full = false;
-// let board2 = ["", "", "", "", "", "", "", "", ""];
-
-// const board_container = document.querySelector(".play-area");
-
-// const winner_statement = document.getElementById("winner");
-
-// check_board_complete = () => {
-//   let flag = true;
-//   board2.forEach(element => {
-//     if (element != player && element != computer) {
-//       flag = false;
-//     }
-//   });
-//   board_full = flag;
-// };
-
-
-// const check_line = (a, b, c) => {
-//   return (
-//     board2[a] == board2[b] &&
-//     board2[b] == board2[c] &&
-//     (board2[a] == player || board2[a] == computer)
-//   );
-// };
-
-// const check_match = () => {
-//   for (i = 0; i < 9; i += 3) {
-//     if (check_line(i, i + 1, i + 2)) {
-//       document.querySelector(`#block_${i}`).classList.add("win");
-//       document.querySelector(`#block_${i + 1}`).classList.add("win");
-//       document.querySelector(`#block_${i + 2}`).classList.add("win");
-//       return board2[i];
-//     }
-//   }
-//   for (i = 0; i < 3; i++) {
-//     if (check_line(i, i + 3, i + 6)) {
-//       document.querySelector(`#block_${i}`).classList.add("win");
-//       document.querySelector(`#block_${i + 3}`).classList.add("win");
-//       document.querySelector(`#block_${i + 6}`).classList.add("win");
-//       return board2[i];
-//     }
-//   }
-//   if (check_line(0, 4, 8)) {
-//     document.querySelector("#block_0").classList.add("win");
-//     document.querySelector("#block_4").classList.add("win");
-//     document.querySelector("#block_8").classList.add("win");
-//     return board2[0];
-//   }
-//   if (check_line(2, 4, 6)) {
-//     document.querySelector("#block_2").classList.add("win");
-//     document.querySelector("#block_4").classList.add("win");
-//     document.querySelector("#block_6").classList.add("win");
-//     return board2[2];
-//   }
-//   return "";
-// };
-
-// const check_for_winner = () => {
-//   let res = check_match()
-//   if (res == player) {
-//     winner.innerText = "Winner is player!!";
-//     winner.classList.add("playerWin");
-//     board_full = true
-//   } else if (res == computer) {
-//     winner.innerText = "Winner is computer";
-//     winner.classList.add("computerWin");
-//     board_full = true
-//   } else if (board_full) {
-//     winner.innerText = "Draw!";
-//     winner.classList.add("draw");
-//   }
-// };
-
-
-// const render_board = () => {
-//   board_container.innerHTML = ""
-//   board2.forEach((e, i) => {
-//     board_container.innerHTML += `<div id="block_${i}" class="block" onclick="addPlayerMove(${i})">${board2[i]}</div>`
-//     if (e == player || e == computer) {
-//       document.querySelector(`#block_${i}`).classList.add("occupied");
-//     }
-//   });
-// };
-
-// const game_loop = () => {
-//   render_board();
-//   check_board_complete();
-//   check_for_winner();
-// }
-
-// const addPlayerMove = e => {
-//   if (!board_full && board2[e] == "") {
-//     board2[e] = player;
-//     game_loop();
-//     addComputerMove();
-//   }
-// };
-
-// const addComputerMove = () => {
-//   if (!board_full) {
-//     do {
-//       selected = Math.floor(Math.random() * 9);
-//     } while (board2[selected] != "");
-//     board2[selected] = computer;
-//     game_loop();
-//   }
-// };
-
-// const reset_board = () => {
-//   board2 = ["", "", "", "", "", "", "", "", ""];
-//   board_full = false;
-//   winner.classList.remove("playerWin");
-//   winner.classList.remove("computerWin");
-//   winner.classList.remove("draw");
-//   winner.innerText = "";
-//   render_board();
-// };
-
-// //initial render
-// render_board();
-
-
-
 //Dark mode
 const darkBtn = document.querySelector('.darkBtn');
 const bodyEl = document.querySelector('body');
@@ -699,25 +533,18 @@ const darkMode = () => {
 }
 
 darkBtn.addEventListener('click', () => {
-    // Get the value of the "dark" item from the local storage on every click
     setDarkMode = localStorage.getItem('dark');
-
     if(setDarkMode !== "on") {
         darkMode();
-        // Set the value of the item to "on" when dark mode is on
         setDarkMode = localStorage.setItem('dark', 'on');
     } else {
         darkMode();
-        // Set the value of the item to  "null" when dark mode if off
         setDarkMode = localStorage.setItem('dark', null);
     }
 });
 
-// Get the value of the "dark" item from the local storage
 let setDarkMode = localStorage.getItem('dark');
 
-// Check dark mode is on or off on page reload
 if(setDarkMode === 'on') {
     darkMode();
-    // toggleTheme();
 }
